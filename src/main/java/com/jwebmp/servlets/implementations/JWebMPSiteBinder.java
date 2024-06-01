@@ -167,44 +167,15 @@ public class JWebMPSiteBinder
     @Override
     public void configureServlets()
     {
-        JWebMPSiteBinder.log.fine("Bound UserAgentStringParser.class");
-        bind(UserAgentStringParser.class)
-                .toInstance(JWebMPSiteBinder.userAgentParser);
         JWebMPSiteBinder.log.fine("Bound ReadableUserAgent.class");
 
         bind(ReadableUserAgent.class)
                 .toProvider(new ReadableUserAgentProvider())
                 .in(CallScope.class);
 
-        JWebMPSiteBinder.log.fine("Bound AjaxResponse.class");
-        bind(AjaxResponse.class)
-                .in(CallScope.class);
-
-        JWebMPSiteBinder.log.fine("Bound AjaxCall.class");
-        bind(AjaxCall.class)
-                .in(CallScope.class);
-
         bind(IPage.class)
                 .toProvider(new PageProvider())
                 .in(CallScope.class);
-
-        bind(JWebMPInterceptionBinder.AjaxCallInterceptorKey)
-                .toProvider(() -> IGuiceContext
-                        .instance()
-                        .getLoader(AjaxCallIntercepter.class, ServiceLoader.load(AjaxCallIntercepter.class)))
-                .in(Singleton.class);
-
-        bind(JWebMPInterceptionBinder.DataCallInterceptorKey)
-                .toProvider(() -> IGuiceContext.instance()
-                                               .getLoader(DataCallIntercepter.class, ServiceLoader.load(DataCallIntercepter.class)))
-                .in(Singleton.class);
-
-        bind(JWebMPInterceptionBinder.SiteCallInterceptorKey)
-                .toProvider(() -> IGuiceContext.instance()
-                                               .getLoader(SiteCallIntercepter.class, ServiceLoader.load(SiteCallIntercepter.class)))
-                .in(Singleton.class);
-
-
         JWebMPSiteBinder.log.fine("Bound Page.class");
 
         if (bindSites)

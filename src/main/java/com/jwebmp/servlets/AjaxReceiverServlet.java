@@ -122,6 +122,8 @@ public class AjaxReceiverServlet
         }
     }
 
+
+
     protected IEvent<?, ?> processEvent() throws InvalidRequestException
     {
         IEvent<?, ?> triggerEvent = null;
@@ -134,7 +136,7 @@ public class AjaxReceiverServlet
         }
         catch (ClassNotFoundException cnfe)
         {
-            AjaxReceiverServlet.log.log(Level.FINEST, "Unable to find the event class specified", cnfe);
+            log.log(Level.FINEST, "Unable to find the event class specified", cnfe);
             throw new InvalidRequestException("The Event To Be Triggered Could Not Be Found");
         }
         return triggerEvent;

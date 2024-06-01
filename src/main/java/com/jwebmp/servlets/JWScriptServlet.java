@@ -44,7 +44,7 @@ public class JWScriptServlet
     @Override
     public void perform()
     {
-        FileTemplates.getFileTemplate(JWScriptServlet.class, JWScriptServlet.FILE_TEMPLATE_NAME, "siteloader");
+        FileTemplates.getFileTemplate(JWScriptServlet.class, "jwscript", "siteloader");
         FileTemplates.getTemplateVariables()
                      .put("SITEADDRESSINSERT", new StringBuilder(SessionHelper.getServerPath()));
         FileTemplates.getTemplateVariables()
