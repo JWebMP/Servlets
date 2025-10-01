@@ -77,7 +77,10 @@ public class AjaxReceiverServlet
                 ajaxCallIntercepter.intercept(ajaxCall, ajaxResponse);
             }
 
-            triggerEvent.fireEvent(ajaxCall, ajaxResponse);
+            // Ensure the reactive chain is executed before writing the response
+            triggerEvent.fireEvent(ajaxCall, ajaxResponse)
+                        .await()
+                        .indefinitely();
 
             output = new StringBuilder(ajaxResponse.toString());
         }
